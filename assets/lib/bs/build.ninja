@@ -1,0 +1,71 @@
+bs_package_flags = -bs-package-name food
+src_root_dir = /home/turo/Documents/food/assets
+bsc = /home/turo/Documents/food/assets/node_modules/bs-platform/lib/bsc.exe
+bsdep = /home/turo/Documents/food/assets/node_modules/bs-platform/lib/bsb_helper.exe
+warnings = -w -30-40+6+7+27+32..39+44+45+101
+bsc_flags = -bs-suffix -nostdlib -I '/home/turo/Documents/food/assets/node_modules/bs-platform/lib/ocaml' -bs-no-version-header -bs-super-errors -color always
+ppx_flags = 
+bs_package_includes = -I /home/turo/Documents/food/assets/node_modules/reason-react/lib/ocaml
+bs_package_dev_includes = 
+namespace = 
+bsb_dir_group = 0
+refmt = /home/turo/Documents/food/assets/node_modules/bs-platform/lib/refmt.exe
+reason_react_jsx = -ppx '/home/turo/Documents/food/assets/node_modules/bs-platform/lib/reactjs_jsx_ppx_2.exe'
+refmt_flags = --print binary
+bsc_lib_includes = -I js
+rule build_ast_and_module_sets_from_re
+  command = ${bsc} -pp "${refmt} ${refmt_flags}" ${reason_react_jsx}  ${ppx_flags} ${warnings} ${bsc_flags} -c -o ${out} -bs-syntax-only -bs-binary-ast -impl ${in}
+  description = [34mBuilding[39m [2m${out}[22m
+build js/link.mlast : build_ast_and_module_sets_from_re $src_root_dir/js/link.re
+rule build_deps
+  command = ${bsdep} ${namespace} -g ${bsb_dir_group} -MD ${in}
+  description = [34mBuilding[39m [2m${out}[22m
+build js/link.mlast.d : build_deps js/link.mlast
+rule build_cmj_cmi
+  command = ${bsc} ${bs_package_flags} -bs-assume-no-mli -bs-no-builtin-ppx-ml -bs-no-implicit-include ${bs_package_includes} ${bsc_lib_includes} ${bsc_extra_includes} ${warnings} ${bsc_flags} -o ${out} -c  ${in} $postbuild
+  depfile = ${in}.d
+  description = [34mBuilding[39m [2m${out}[22m
+build js/link.cmj |  $src_root_dir/js/link.bs.js js/link.cmi : build_cmj_cmi js/link.mlast
+  bsc_flags = $bsc_flags -bs-re-out -bs-super-errors
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:js
+build js/Page.mlast : build_ast_and_module_sets_from_re $src_root_dir/js/Page.re
+build js/Page.mlast.d : build_deps js/Page.mlast
+build js/Page.cmj |  $src_root_dir/js/Page.bs.js js/Page.cmi : build_cmj_cmi js/Page.mlast
+  bsc_flags = $bsc_flags -bs-re-out -bs-super-errors
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:js
+build js/Root.mlast : build_ast_and_module_sets_from_re $src_root_dir/js/Root.re
+build js/Root.mlast.d : build_deps js/Root.mlast
+build js/Root.cmj |  $src_root_dir/js/Root.bs.js js/Root.cmi : build_cmj_cmi js/Root.mlast
+  bsc_flags = $bsc_flags -bs-re-out -bs-super-errors
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:js
+build js/Week.mlast : build_ast_and_module_sets_from_re $src_root_dir/js/Week.re
+build js/Week.mlast.d : build_deps js/Week.mlast
+build js/Week.cmj |  $src_root_dir/js/Week.bs.js js/Week.cmi : build_cmj_cmi js/Week.mlast
+  bsc_flags = $bsc_flags -bs-re-out -bs-super-errors
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:js
+build js/index.mlast : build_ast_and_module_sets_from_re $src_root_dir/js/index.re
+build js/index.mlast.d : build_deps js/index.mlast
+build js/index.cmj |  $src_root_dir/js/index.bs.js js/index.cmi : build_cmj_cmi js/index.mlast
+  bsc_flags = $bsc_flags -bs-re-out -bs-super-errors
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:js
+build js/Search.mlast : build_ast_and_module_sets_from_re $src_root_dir/js/Search.re
+build js/Search.mlast.d : build_deps js/Search.mlast
+build js/Search.cmj |  $src_root_dir/js/Search.bs.js js/Search.cmi : build_cmj_cmi js/Search.mlast
+  bsc_flags = $bsc_flags -bs-re-out -bs-super-errors
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:js
+build js/NotFound.mlast : build_ast_and_module_sets_from_re $src_root_dir/js/NotFound.re
+build js/NotFound.mlast.d : build_deps js/NotFound.mlast
+build js/NotFound.cmj |  $src_root_dir/js/NotFound.bs.js js/NotFound.cmi : build_cmj_cmi js/NotFound.mlast
+  bsc_flags = $bsc_flags -bs-re-out -bs-super-errors
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:js
+build js/WeekDetails.mlast : build_ast_and_module_sets_from_re $src_root_dir/js/WeekDetails.re
+build js/WeekDetails.mlast.d : build_deps js/WeekDetails.mlast
+build js/WeekDetails.cmj |  $src_root_dir/js/WeekDetails.bs.js js/WeekDetails.cmi : build_cmj_cmi js/WeekDetails.mlast
+  bsc_flags = $bsc_flags -bs-re-out -bs-super-errors
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:js
+build js/AppContainer.mlast : build_ast_and_module_sets_from_re $src_root_dir/js/AppContainer.re
+build js/AppContainer.mlast.d : build_deps js/AppContainer.mlast
+build js/AppContainer.cmj |  $src_root_dir/js/AppContainer.bs.js js/AppContainer.cmi : build_cmj_cmi js/AppContainer.mlast
+  bsc_flags = $bsc_flags -bs-re-out -bs-super-errors
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:js
+build build.ninja : phony  ||  js/AppContainer.mlast.d js/WeekDetails.mlast.d js/NotFound.mlast.d js/Search.mlast.d js/index.mlast.d js/Week.mlast.d js/Root.mlast.d js/Page.mlast.d js/link.mlast.d
