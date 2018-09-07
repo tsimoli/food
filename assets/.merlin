@@ -1,4 +1,5 @@
 ####{BSB GENERATED: NO EDIT
+FLG -ppx /home/turo/Documents/food/assets/node_modules/graphql_ppx/ppx
 FLG -ppx '/home/turo/Documents/food/assets/node_modules/bs-platform/lib/reactjs_jsx_ppx_2.exe'
 FLG -ppx /home/turo/Documents/food/assets/node_modules/bs-platform/lib/bsppx.exe
 S /home/turo/Documents/food/assets/node_modules/bs-platform/lib/ocaml
@@ -7,6 +8,8 @@ FLG -nostdlib -color always
 FLG -w -30-40+6+7+27+32..39+44+45+101
 S /home/turo/Documents/food/assets/node_modules/reason-react/lib/ocaml
 B /home/turo/Documents/food/assets/node_modules/reason-react/lib/ocaml
+S /home/turo/Documents/food/assets/node_modules/reason-apollo/lib/ocaml
+B /home/turo/Documents/food/assets/node_modules/reason-apollo/lib/ocaml
 S js
 B lib/bs/js
 ####BSB GENERATED: NO EDIT}

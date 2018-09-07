@@ -1,5 +1,3 @@
-type t = (string, string, string);
-
 type filterOption = {
   buttonText: string,
   filterName: string,
