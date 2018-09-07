@@ -19,6 +19,8 @@ $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
 
+
+
 // Import only what you need from Bulma
 @import "../node_modules/bulma/sass/utilities/_all.sass";
 @import "../node_modules/bulma/sass/base/_all.sass";
@@ -26,3 +28,14 @@ $input-shadow: none;
 @import "../node_modules/bulma/sass/elements/container.sass";
 @import "../node_modules/bulma/sass/layout/section.sass";
 @import "../node_modules/bulma/sass/elements/title.sass";
+@import "../node_modules/bulma/sass/components/card.sass";
+
+// TODO: Move to own file
+
+.filter {
+    margin: 8px;
+}
+
+.filter-selected {
+    border-bottom: 4px solid #ff4742 !important;
+}

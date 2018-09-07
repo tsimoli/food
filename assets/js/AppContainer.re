@@ -4,8 +4,6 @@ requireCSS("../css/customstyles.scss");
 
 type route =
   | Search
-  | Week
-  | WeekDetails(int)
   | NotFound;
 
 type state = {route};
@@ -21,8 +19,6 @@ let reducer = (action, _state) =>
 let mapUrlToRoute = (url: ReasonReact.Router.url) =>
   switch (url.path) {
   | [] => Search
-  | ["week"] => Week
-  | ["week", id] => WeekDetails(int_of_string(id))
   | _ => NotFound
   };
 
@@ -46,9 +42,7 @@ let make = _children => {
         </h1>
         {
           switch (self.state.route) {
-          | Search => <Search />
-          | Week => <Week />
-          | WeekDetails(id) => <WeekDetails id />
+          | Search => <Foods />
           | NotFound => <NotFound />
           }
         }

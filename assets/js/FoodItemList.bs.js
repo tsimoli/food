@@ -3,7 +3,7 @@
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 
-var component = ReasonReact.statelessComponent("Week");
+var component = ReasonReact.statelessComponent("FoodItemList");
 
 function make() {
   return /* record */[
@@ -17,7 +17,17 @@ function make() {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
-              return React.createElement("div", undefined, "Week");
+              return React.createElement("div", undefined, React.createElement("div", {
+                              className: "card"
+                            }, React.createElement("header", {
+                                  className: "card-header"
+                                }, React.createElement("p", {
+                                      className: "card-header-title"
+                                    }, "Kasvislasagne")), React.createElement("div", {
+                                  className: "card-content"
+                                }, React.createElement("div", {
+                                      className: "content"
+                                    }))));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

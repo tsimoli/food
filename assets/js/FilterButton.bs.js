@@ -1,11 +1,12 @@
 'use strict';
 
+var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 
-var component = ReasonReact.statelessComponent("WeekDetails");
+var component = ReasonReact.statelessComponent("FilterButton");
 
-function make(_, _$1) {
+function make(buttonText, filterName, isSelected, clickCallback, emoji, _) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -17,7 +18,14 @@ function make(_, _$1) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
-              return React.createElement("div", undefined, "WeekDetails");
+              return React.createElement("div", {
+                          className: "filter button info " + (
+                            isSelected ? "filter-selected" : ""
+                          ),
+                          onClick: (function () {
+                              return Curry._1(clickCallback, filterName);
+                            })
+                        }, emoji + buttonText);
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],
