@@ -12,4 +12,6 @@ S /home/turo/Documents/food/assets/node_modules/reason-apollo/lib/ocaml
 B /home/turo/Documents/food/assets/node_modules/reason-apollo/lib/ocaml
 S js
 B lib/bs/js
+S js/client
+B lib/bs/js/client
 ####BSB GENERATED: NO EDIT}

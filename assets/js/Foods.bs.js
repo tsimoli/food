@@ -22,9 +22,9 @@ function make() {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
-              return React.createElement("div", undefined, ReasonReact.element(undefined, undefined, FilterGroup.make(self[/* state */1][/* activeFilters */0], (function (filterName) {
-                                    return Curry._1(self[/* send */3], /* AddOrRemoveFilter */[filterName]);
-                                  }), /* array */[])), ReasonReact.element(undefined, undefined, FoodItemList.make(/* array */[])));
+              return React.createElement("div", undefined, React.createElement("div", undefined, ReasonReact.element(undefined, undefined, FilterGroup.make(self[/* state */1][/* activeFilters */0], (function (filterName) {
+                                        return Curry._1(self[/* send */3], /* AddOrRemoveFilter */[filterName]);
+                                      }), /* array */[])), ReasonReact.element(undefined, undefined, FoodItemList.make(self[/* state */1][/* activeFilters */0], /* array */[]))));
             }),
           /* initialState */(function () {
               return /* record */[/* activeFilters : [] */0];

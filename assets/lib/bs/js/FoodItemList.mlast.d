@@ -1,1 +1,1 @@
-js/FoodItemList.cmj :
+js/FoodItemList.cmj : js/Food.cmj

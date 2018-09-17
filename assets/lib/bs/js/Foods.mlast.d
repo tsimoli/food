@@ -1,1 +1,1 @@
-js/Foods.cmj : js/FilterGroup.cmj js/FoodItemList.cmj
+js/Foods.cmj : js/FilterGroup.cmj js/Food.cmj js/FoodItemList.cmj

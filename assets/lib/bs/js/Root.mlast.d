@@ -1,1 +1,1 @@
-js/Root.cmj : js/AppContainer.cmj
+js/Root.cmj : js/AppContainer.cmj js/client/Client.cmj

@@ -13,6 +13,19 @@ defmodule FoodWeb.Router do
     plug(:accepts, ["json"])
   end
 
+  scope "/" do
+    pipe_through([:api])
+
+    forward("/api", Absinthe.Plug, schema: FoodWeb.Schema)
+
+    forward(
+      "/graphiql",
+      Absinthe.Plug.GraphiQL,
+      schema: FoodWeb.Schema,
+      socket: FoodWeb.UserSocket
+    )
+  end
+
   scope "/", FoodWeb do
     # Use the default browser stack
     pipe_through(:browser)

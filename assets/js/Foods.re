@@ -1,7 +1,11 @@
+/* Open Food here to get food record */
+
 type state = {activeFilters: list(string)};
 
 type action =
   | AddOrRemoveFilter(string);
+
+type foods = list(Food.food);
 
 let component = ReasonReact.reducerComponent("Foods");
 let make = _children => {
@@ -26,13 +30,15 @@ let make = _children => {
     },
   render: self =>
     <div>
-      <FilterGroup
-        activeFilters={self.state.activeFilters}
-        addOrRemoveFilter={
-          filterName => self.send(AddOrRemoveFilter(filterName))
-        }
-      />
-      <FoodItemList />
+      <div>
+        <FilterGroup
+          activeFilters={self.state.activeFilters}
+          addOrRemoveFilter={
+            filterName => self.send(AddOrRemoveFilter(filterName))
+          }
+        />
+        <FoodItemList activeFilters={self.state.activeFilters} />
+      </div>
     </div>,
   /*
    <div>
