@@ -40,16 +40,4 @@ let make = _children => {
         <FoodItemList activeFilters={self.state.activeFilters} />
       </div>
     </div>,
-  /*
-   <div>
-     {
-       ReasonReact.array(
-         Array.map(
-           filter => <p> {ReasonReact.string(filter)} </p>,
-           Array.of_list(self.state.activeFilters),
-         ),
-       )
-     }
-   </div>
-   */
 };

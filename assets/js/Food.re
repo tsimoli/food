@@ -1,5 +1,6 @@
 type food = {
+  id: string,
   name: string,
-  ingredients: string,
-  instructions: string,
+  tags: array(string),
+  url: option(string),
 };

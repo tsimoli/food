@@ -5,14 +5,14 @@ defmodule Food.Foods.Food do
 
   schema "foods" do
     field(:name, :string)
+    field(:url, :string)
     field(:tags, {:array, :string})
     timestamps()
   end
 
   def changeset(food, params \\ %{}) do
     food
-    |> cast(params, [:name, :instructions, :tags])
-    |> cast_embed(:ingredients)
+    |> cast(params, [:name, :url, :tags])
     |> validate_required([:name])
   end
 end

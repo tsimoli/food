@@ -12,7 +12,7 @@ var ReasonApollo = require("reason-apollo/src/ReasonApollo.bs.js");
 
 var component = ReasonReact.statelessComponent("FoodItemList");
 
-var ppx_printed_query = "query ($tags: [String!]!)  {\nfoods(tags: $tags)  {\nname  \ninstructions  \ningredients  \n}\n\n}\n";
+var ppx_printed_query = "query ($tags: [String!]!)  {\nfoods(tags: $tags)  {\nid  \nname  \ntags  \nurl  \n}\n\n}\n";
 
 function parse(value) {
   var match = Js_json.decodeObject(value);
@@ -29,34 +29,55 @@ function parse(value) {
                   var match = Js_json.decodeObject(value);
                   if (match !== undefined) {
                     var value$1 = Js_primitive.valFromOption(match);
-                    var match$1 = value$1["name"];
-                    var field_name;
+                    var match$1 = value$1["id"];
+                    var field_id;
                     if (match$1 !== undefined) {
                       var match$2 = Js_json.decodeString(match$1);
-                      field_name = match$2 !== undefined ? match$2 : Js_exn.raiseError("graphql_ppx: Expected string, got " + JSON.stringify(match$1));
+                      field_id = match$2 !== undefined ? match$2 : Js_exn.raiseError("graphql_ppx: Expected string, got " + JSON.stringify(match$1));
+                    } else {
+                      field_id = Js_exn.raiseError("graphql_ppx: Field id on type Food is missing");
+                    }
+                    var match$3 = value$1["name"];
+                    var field_name;
+                    if (match$3 !== undefined) {
+                      var match$4 = Js_json.decodeString(match$3);
+                      field_name = match$4 !== undefined ? match$4 : Js_exn.raiseError("graphql_ppx: Expected string, got " + JSON.stringify(match$3));
                     } else {
                       field_name = Js_exn.raiseError("graphql_ppx: Field name on type Food is missing");
                     }
-                    var match$3 = value$1["instructions"];
-                    var field_instructions;
-                    if (match$3 !== undefined) {
-                      var match$4 = Js_json.decodeString(match$3);
-                      field_instructions = match$4 !== undefined ? match$4 : Js_exn.raiseError("graphql_ppx: Expected string, got " + JSON.stringify(match$3));
-                    } else {
-                      field_instructions = Js_exn.raiseError("graphql_ppx: Field instructions on type Food is missing");
-                    }
-                    var match$5 = value$1["ingredients"];
-                    var field_ingredients;
+                    var match$5 = value$1["tags"];
+                    var field_tags;
                     if (match$5 !== undefined) {
-                      var match$6 = Js_json.decodeString(match$5);
-                      field_ingredients = match$6 !== undefined ? match$6 : Js_exn.raiseError("graphql_ppx: Expected string, got " + JSON.stringify(match$5));
+                      var match$6 = Js_json.decodeArray(match$5);
+                      field_tags = match$6 !== undefined ? match$6.map((function (value) {
+                                var match = Js_json.decodeString(value);
+                                if (match !== undefined) {
+                                  return match;
+                                } else {
+                                  return Js_exn.raiseError("graphql_ppx: Expected string, got " + JSON.stringify(value));
+                                }
+                              })) : Js_exn.raiseError("graphql_ppx: Expected array, got " + JSON.stringify(match$5));
                     } else {
-                      field_ingredients = Js_exn.raiseError("graphql_ppx: Field ingredients on type Food is missing");
+                      field_tags = Js_exn.raiseError("graphql_ppx: Field tags on type Food is missing");
+                    }
+                    var match$7 = value$1["url"];
+                    var field_url;
+                    if (match$7 !== undefined) {
+                      var match$8 = Js_json.decodeNull(match$7);
+                      if (match$8 !== undefined) {
+                        field_url = undefined;
+                      } else {
+                        var match$9 = Js_json.decodeString(match$7);
+                        field_url = match$9 !== undefined ? match$9 : Js_exn.raiseError("graphql_ppx: Expected string, got " + JSON.stringify(match$7));
+                      }
+                    } else {
+                      field_url = undefined;
                     }
                     return /* record */[
+                            /* id */field_id,
                             /* name */field_name,
-                            /* ingredients */field_ingredients,
-                            /* instructions */field_instructions
+                            /* tags */field_tags,
+                            /* url */field_url
                           ];
                   } else {
                     return Js_exn.raiseError("graphql_ppx: Expected object of type Food, got " + JSON.stringify(value));
@@ -134,7 +155,6 @@ function make$1(activeFilters, _) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
-              console.log("REnder");
               var foodsQuery = make($$Array.of_list(activeFilters), /* () */0);
               return ReasonReact.element(undefined, undefined, Curry.app(GetFoodsQuery[/* make */3], [
                               Js_primitive.some(foodsQuery.variables),
@@ -149,15 +169,20 @@ function make$1(activeFilters, _) {
                               (function (param) {
                                   var result = param[/* result */0];
                                   if (typeof result === "number") {
-                                    return React.createElement("div", undefined, "Loading");
+                                    return React.createElement("div", {
+                                                className: "lds-ellipsis"
+                                              }, React.createElement("div", undefined), React.createElement("div", undefined), React.createElement("div", undefined), React.createElement("div", undefined));
                                   } else if (result.tag) {
                                     var match = result[0].foods;
                                     if (match !== undefined) {
                                       return React.createElement("div", undefined, $$Array.map((function (food) {
-                                                        return React.createElement("p", undefined, food[/* name */0]);
+                                                        var match = food[/* url */3];
+                                                        return React.createElement("p", {
+                                                                    key: food[/* id */0]
+                                                                  }, match !== undefined ? match : "No url");
                                                       }), match));
                                     } else {
-                                      return React.createElement("div", undefined, "Failed");
+                                      return React.createElement("div", undefined, "Failed to load foods");
                                     }
                                   } else {
                                     return React.createElement("div", undefined, result[0].message);

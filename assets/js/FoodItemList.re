@@ -6,9 +6,10 @@ module GetFoods = [%graphql
   {|
   query($tags: [String!]!){
       foods (tags: $tags) @bsRecord {
+          id
           name
-          instructions
-          ingredients
+          tags
+          url
       }
   }
 |}
@@ -19,14 +20,13 @@ module GetFoodsQuery = ReasonApollo.CreateQuery(GetFoods);
 let make = (~activeFilters, _children) => {
   ...component,
   render: _self => {
-    Js.log("REnder");
     let foodsQuery = GetFoods.make(~tags=Array.of_list(activeFilters), ());
 
     <GetFoodsQuery variables=foodsQuery##variables>
       ...{
            ({result}) =>
              switch (result) {
-             | Loading => <div> {ReasonReact.string("Loading")} </div>
+             | Loading => <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
              | Error(error) =>
                <div> {ReasonReact.string(error##message)} </div>
              | Data(response) =>
@@ -37,13 +37,25 @@ let make = (~activeFilters, _children) => {
                      ReasonReact.array(
                        Array.map(
                          (food: Food.food) =>
-                           <p> {ReasonReact.string(food.name)} </p>,
+
+                           <p key=food.id>
+                            (switch(food.url) {
+                             | None => {ReasonReact.string("No url")}
+                             | Some(url) =>
+
+                              {ReasonReact.string(url)}
+                              }
+                            )
+                            </p>
+                         ,
+
                          foods,
                        ),
                      )
                    }
                  </div>
-               | None => <div> {ReasonReact.string("Failed")} </div>
+               | None =>
+                 <div> {ReasonReact.string("Failed to load foods")} </div>
                }
              }
          }
