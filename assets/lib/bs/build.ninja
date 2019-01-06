@@ -1,16 +1,16 @@
 bs_package_flags = -bs-package-name food
-src_root_dir = /home/turo/Documents/food/assets
-bsc = /home/turo/Documents/food/assets/node_modules/bs-platform/lib/bsc.exe
-bsdep = /home/turo/Documents/food/assets/node_modules/bs-platform/lib/bsb_helper.exe
+src_root_dir = /home/turo/Development/projects/food/assets
+bsc = /home/turo/Development/projects/food/assets/node_modules/bs-platform/lib/bsc.exe
+bsdep = /home/turo/Development/projects/food/assets/node_modules/bs-platform/lib/bsb_helper.exe
 warnings = -w -30-40+6+7+27+32..39+44+45+101
-bsc_flags = -bs-suffix -nostdlib -I '/home/turo/Documents/food/assets/node_modules/bs-platform/lib/ocaml' -bs-no-version-header -bs-super-errors -color always
-ppx_flags = -ppx '/home/turo/Documents/food/assets/node_modules/graphql_ppx/ppx'
-bs_package_includes = -I /home/turo/Documents/food/assets/node_modules/reason-react/lib/ocaml -I /home/turo/Documents/food/assets/node_modules/reason-apollo/lib/ocaml
+bsc_flags = -bs-suffix -nostdlib -I '/home/turo/Development/projects/food/assets/node_modules/bs-platform/lib/ocaml' -bs-no-version-header -bs-super-errors -color always
+ppx_flags = -ppx '/home/turo/Development/projects/food/assets/node_modules/graphql_ppx/ppx'
+bs_package_includes = -I /home/turo/Development/projects/food/assets/node_modules/reason-react/lib/ocaml -I /home/turo/Development/projects/food/assets/node_modules/reason-apollo/lib/ocaml
 bs_package_dev_includes = 
 namespace = 
 bsb_dir_group = 0
-refmt = /home/turo/Documents/food/assets/node_modules/bs-platform/lib/refmt.exe
-reason_react_jsx = -ppx '/home/turo/Documents/food/assets/node_modules/bs-platform/lib/reactjs_jsx_ppx_2.exe'
+refmt = /home/turo/Development/projects/food/assets/node_modules/bs-platform/lib/refmt.exe
+reason_react_jsx = -ppx '/home/turo/Development/projects/food/assets/node_modules/bs-platform/lib/reactjs_jsx_ppx_2.exe'
 refmt_flags = --print binary
 bsc_lib_includes = -I js/client -I js
 rule build_ast_and_module_sets_from_re
